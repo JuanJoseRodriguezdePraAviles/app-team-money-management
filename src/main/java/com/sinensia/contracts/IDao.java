@@ -1,4 +1,4 @@
-package com.sinensia.dao;
+package com.sinensia.contracts;
 
 import java.sql.SQLException;
 import java.util.List;
