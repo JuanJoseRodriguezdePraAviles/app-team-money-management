@@ -6,6 +6,7 @@ public class Categoria {
 	private int categoriaId;
 	private String nombre;
 	private List<Tramite> listaTramites;
+	private boolean esIngreso;
 	
 	public int getCategoriaId() {
 		return categoriaId;
@@ -25,15 +26,22 @@ public class Categoria {
 	public void setListaTramites(List<Tramite> listaTramites) {
 		this.listaTramites = listaTramites;
 	}
+	public boolean isEsIngreso() {
+		return esIngreso;
+	}
+	public void setEsIngreso(boolean esIngreso) {
+		this.esIngreso = esIngreso;
+	}
 	
 	public Categoria() {
 		
 	}
 	
-	public Categoria(int categoriaId, String nombre, List<Tramite> listaTramites) {
+	public Categoria(int categoriaId, String nombre, List<Tramite> listaTramites, boolean esIngreso) {
 		this.categoriaId = categoriaId;
 		this.nombre = nombre;
 		this.listaTramites = listaTramites;
+		this.esIngreso = esIngreso;
 	}
 	
 }
