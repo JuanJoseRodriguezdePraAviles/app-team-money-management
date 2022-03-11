@@ -38,10 +38,7 @@ public class CategoriaDao extends BaseDao implements IDao<Categoria>{
 			rs = preparedStatement.executeQuery();
 			
 			while(rs.next()) {
-				Categoria categoria = new Categoria();
-				categoria.setCategoriaId(rs.getInt("categoriaId"));
-				categoria.setNombre(rs.getString("nombre"));
-				categoria.setEsIngreso(rs.getBoolean("esIngreso"));
+				Categoria categoria = new Categoria(rs.getInt("categoriaId"), rs.getString("nombre"), rs.getBoolean("esIngreso"));
 				categorias.add(categoria);
 			}
 		} catch(SQLException e) {
@@ -57,7 +54,6 @@ public class CategoriaDao extends BaseDao implements IDao<Categoria>{
 			if(connect != null) {
 				connect.close();
 			}
-			
 		}
 		
 		return categorias;
@@ -66,22 +62,19 @@ public class CategoriaDao extends BaseDao implements IDao<Categoria>{
 	@Override
 	public Categoria getById(int id) throws SQLException {
 		PreparedStatement preparedStatement = null;
-		List<Categoria> categorias = new ArrayList<Categoria>();
 		ResultSet rs = null;
 		Categoria categoria = null;
 		
 		try {
 			connect = super.getconnection();
-			preparedStatement = connect.prepareStatement("SELECT * FROM categoria");
+			preparedStatement = connect.prepareStatement(
+					"SELECT * FROM categoria WHERE categoriaId = ?");
+			preparedStatement.setInt(1, id);
 			
 			rs = preparedStatement.executeQuery();
+			rs.next();
 			
-			categoria = new Categoria();
-			categoria.setCategoriaId(rs.getInt("categoriaId"));
-			categoria.setNombre(rs.getString("nombre"));
-			categoria.setEsIngreso(rs.getBoolean("esIngreso"));
-			categorias.add(categoria);
-			
+			categoria = new Categoria(rs.getInt("categoriaId"), rs.getString("nombre"), rs.getBoolean("esIngreso"));
 		} catch(SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -95,7 +88,6 @@ public class CategoriaDao extends BaseDao implements IDao<Categoria>{
 			if(connect != null) {
 				connect.close();
 			}
-			
 		}
 		
 		return categoria;
