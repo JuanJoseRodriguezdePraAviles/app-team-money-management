@@ -44,4 +44,10 @@ public class Categoria {
 		this.esIngreso = esIngreso;
 	}
 	
+	public Categoria(int categoriaId, String nombre, boolean esIngreso) {
+		this.categoriaId = categoriaId;
+		this.nombre = nombre;
+		this.esIngreso = esIngreso;
+	}
+	
 }
