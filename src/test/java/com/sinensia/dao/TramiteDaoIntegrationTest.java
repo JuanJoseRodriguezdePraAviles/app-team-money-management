@@ -62,13 +62,8 @@ public class TramiteDaoIntegrationTest {
 	}
 
 	@Test
-	public void testGetById() throws SQLException {
-		
-		IDao<Tramite> TramiteDao = new TramiteDao();
-		Tramite tramite = TramiteDao.getById(idtramite);
-		
-		assertTrue(tramite != null);
-		
+	public void testGetById() {
+		fail("Not yet implemented");
 	}
 
 }
