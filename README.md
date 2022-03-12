@@ -9,15 +9,23 @@ También permite agregar nuevos tramites a través de un formulario y ofrece, el
 Además tiene un página para gestión de categorías, se pueden crear y eliminar
 
 Desarrollado con:
+
 maven 4.0.0
+
 JUnitParams 1.1.0
+
 junit 4.12
+
 git 2.35.1
+
 jdk 1.8.0
+
 javax.servlet 2.5
 
 Prerequisites
+
 git init . on project folder
+
 Ejecutar script de BBDD con BBDD local
 
 
