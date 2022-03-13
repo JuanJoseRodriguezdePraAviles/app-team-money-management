@@ -9,14 +9,11 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import com.sinensia.contracts.IDao;
 import com.sinensia.model.Categoria;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CategoriaDaoIntegrationTest {
 
 	@BeforeClass
@@ -36,19 +33,19 @@ public class CategoriaDaoIntegrationTest {
 	}
 	
 	private static int idCategoria = 1;
-
-	@Test
-	public void test1GetById() throws SQLException {
-		IDao<Categoria> categoriaDao = new CategoriaDao();
-		Categoria categoria = categoriaDao.getById(idCategoria);
-		assertTrue(categoria != null);
-	}
 	
 	@Test
-	public void test2Get() throws SQLException {
+	public void testGet() throws SQLException {
 		IDao<Categoria> categoriaDao = new CategoriaDao();
 		List<Categoria> categorias = categoriaDao.get();
 		assertTrue(categorias.size() > 0);
+	}
+	
+	@Test
+	public void testGetById() throws SQLException {
+		IDao<Categoria> categoriaDao = new CategoriaDao();
+		Categoria categoria = categoriaDao.getById(idCategoria);
+		assertTrue(categoria != null);
 	}
 	
 }
