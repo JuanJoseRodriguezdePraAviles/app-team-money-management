@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContextEvent;
+
 import com.sinensia.contracts.IDao;
 import com.sinensia.model.Categoria;
 
@@ -98,5 +100,6 @@ public class CategoriaDao extends BaseDao implements IDao<Categoria>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }
