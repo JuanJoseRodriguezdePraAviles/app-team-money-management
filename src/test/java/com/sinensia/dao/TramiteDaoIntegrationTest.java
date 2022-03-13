@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -57,8 +58,11 @@ public class TramiteDaoIntegrationTest {
 	}
 
 	@Test
-	public void testGet() {
-		fail("Not yet implemented");
+	public void testGet() throws SQLException {
+		IDao<Tramite> tramiteDao = new TramiteDao();
+		List<Tramite> tramites = tramiteDao.get();
+		
+		assertTrue(tramites != null);
 	}
 
 	@Test
