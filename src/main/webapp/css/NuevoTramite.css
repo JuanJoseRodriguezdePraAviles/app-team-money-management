@@ -1,0 +1,30 @@
+.principalDiv {
+	text-align: center;
+	margin-top: 2%;
+}
+.centerDiv {
+	margin-left: 32%;
+}
+.leftColumnConfig {
+	width: 25%;
+	margin-right: 5%;
+	margin-bottom: 2%;
+}
+.gastoColor {
+	color: red;
+}
+.ingresoSpace {
+	margin-left: 5%;
+}
+.ingresoColor {
+	color: green;
+}
+.dateSelectSize {
+	width: 23%;
+}
+#fechaTramite {
+	margin-bottom: 13%;
+}
+.addTramite {
+	width: 36%;
+}
