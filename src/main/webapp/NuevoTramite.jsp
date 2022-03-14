@@ -12,41 +12,12 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link
+	href="css/NuevoTramite.css"
+	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<style>
-	.principalDiv {
-		text-align: center;
-		margin-top: 2%;
-	}
-	.centerDiv {
-		margin-left: 32%;
-	}
-	.leftColumnConfig {
-		width: 25%;
-		margin-right: 5%;
-		margin-bottom: 2%;
-	}
-	.gastoColor {
-		color: red;
-	}
-	.ingresoSpace {
-		margin-left: 5%;
-	}
-	.ingresoColor {
-		color: green;
-	}
-	.dateSelectSize {
-		width: 23%;
-	}
-	#fechaTramite {
-		margin-bottom: 13%;
-	}
-	.addTramite {
-		width: 36%;
-	}
-</style>
 <body>
 	<%LocalDate fechaActual = LocalDate.now(); %>
 	<%Locale fechaEs = new Locale("es", "ES"); %>
