@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContextEvent;
-
 import com.sinensia.contracts.IDao;
 import com.sinensia.model.Categoria;
 
