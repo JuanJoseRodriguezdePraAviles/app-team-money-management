@@ -66,7 +66,7 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 		PreparedStatement preparedStatement=null;
 		try {
 			connect=super.getconnection();
-			preparedStatement=connect.prepareStatement("SELECT * From ");
+			preparedStatement=connect.prepareStatement("SELECT * FROM tramite");
 			
 			ResultSet rs=preparedStatement.executeQuery();
 			
