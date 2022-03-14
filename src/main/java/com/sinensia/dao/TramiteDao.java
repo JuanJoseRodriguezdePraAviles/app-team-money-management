@@ -32,10 +32,10 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 			
 					preparedStatement.setInt(1, tramite.getTramiteId());
 					preparedStatement.setDouble(2, tramite.getValor());
-					preparedStatement.setInt(3, tramite.getCategoriaId());
-					preparedStatement.setString(4, tramite.getConcepto());
-					preparedStatement.setDate(5, Date.valueOf(tramite.getFecha()));
-					//preparedStatement.setLocalDate()
+					preparedStatement.setDate(3, Date.valueOf(tramite.getFecha()));
+					preparedStatement.setInt(4, tramite.getCategoriaId());
+					preparedStatement.setString(5, tramite.getConcepto());
+					
 					
 			preparedStatement.executeUpdate();
 			rs = preparedStatement.getGeneratedKeys();
