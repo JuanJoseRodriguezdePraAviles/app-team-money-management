@@ -32,16 +32,16 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 			
 					preparedStatement.setInt(1, tramite.getTramiteId());
 					preparedStatement.setDouble(2, tramite.getValor());
-					preparedStatement.setInt(3, tramite.getCategoriaId());
-					preparedStatement.setString(4, tramite.getConcepto());
-					preparedStatement.setDate(5, Date.valueOf(tramite.getFecha()));
-					//preparedStatement.setLocalDate()
+					preparedStatement.setDate(3, Date.valueOf(tramite.getFecha()));
+					preparedStatement.setInt(4, tramite.getCategoriaId());
+					preparedStatement.setString(5, tramite.getConcepto());
+				
 					
 			preparedStatement.executeUpdate();
 			rs = preparedStatement.getGeneratedKeys();
 			
 			rs.next();
-			idTramite = rs.getInt(idTramite);
+			idTramite = rs.getInt(1);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,7 +102,7 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 			rs = preparedStatement.executeQuery();
 			rs.next();
 			
-			tramite = new Tramite(rs.getInt("tramite"),rs.getDouble("valor"),rs.getDate("fecha").toLocalDate(), 
+			tramite = new Tramite(rs.getInt("tramiteId"),rs.getDouble("valor"),rs.getDate("fecha").toLocalDate(), 
 					rs.getInt("categoriaId"),rs.getString("concepto"));
 			
 		} catch (Exception e) {
@@ -122,8 +122,27 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 
 	@Override
 	public int remove(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int filasAfectadas = 0;
+		PreparedStatement preparedStatement= null;
+		try {
+			connect=super.getconnection();
+			preparedStatement= 
+					connect.prepareStatement
+					("DELETE FROM tramite " + "WHERE tramiteId=?");
+			preparedStatement.setInt(1,id);
+			
+			filasAfectadas = preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;	
+		} finally {
+			if (preparedStatement !=null)
+				preparedStatement.close();
+			if (connect != null)
+				connect.close();
+		}
+		return filasAfectadas;
 	}
 	
 	

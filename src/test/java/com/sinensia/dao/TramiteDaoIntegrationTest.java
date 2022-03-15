@@ -17,32 +17,16 @@ import com.sinensia.model.Tramite;
 
 public class TramiteDaoIntegrationTest {
 
+	static IDao<Tramite> listaITramiteDao = new TramiteDao();
+	TramiteDao tramiteDao = null;
+	
+	private static int idtramite = 3;
+	private static int categoriaId = 1;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	
-	private static int idtramite = 1;
-	private static int categoriaId = 1;
-	@Test
-	public void testAdd() throws SQLException {
 		
 		Tramite tramite = new Tramite();
-		
-		IDao<Tramite> listaITramiteDao = new TramiteDao();
-		
 		tramite.setTramiteId(idtramite);
 		tramite.setValor(22.2);
 		tramite.setCategoriaId(categoriaId);
@@ -51,9 +35,44 @@ public class TramiteDaoIntegrationTest {
 		
 		
 		idtramite =  listaITramiteDao.add(tramite);
-		categoriaId = listaITramiteDao.add(tramite);
 		assertTrue(idtramite>0);
-		assertTrue(categoriaId>0);
+		
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		TramiteDao tramite = new TramiteDao();
+		
+		tramite.remove(3);
+		tramite.remove(7);
+		
+	}
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+
+	@Test
+	public void testAdd() throws SQLException {
+		
+		Tramite tramite = new Tramite();
+		
+		IDao<Tramite> listaITramiteDao = new TramiteDao();
+		
+		tramite.setTramiteId(7);
+		tramite.setValor(22.2);
+		tramite.setCategoriaId(categoriaId);
+		tramite.setConcepto("nomina");
+		tramite.setFecha(LocalDate.parse("2020-04-05"));
+		
+		
+		idtramite =  listaITramiteDao.add(tramite);
+		assertTrue(idtramite>0);
+		
 		
 	}
 
