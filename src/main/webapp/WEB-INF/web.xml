@@ -3,25 +3,30 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>CategoriaController</servlet-name>
-  	<display-name>CategoriaController</display-name>
-  	<description></description>
-  	<servlet-class>com.sinensia.controllers.CategoriaController</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>TramiteController</servlet-name>
-  	<display-name>TramiteController</display-name>
-  	<description></description>
-  	<servlet-class>com.sinensia.controllers.TramiteController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>CategoriaController</servlet-name>
-  	<url-pattern>/CategoriaController</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>TramiteController</servlet-name>
-  	<url-pattern>/TramiteController</url-pattern>
-  </servlet-mapping>
+	<display-name>Archetype Created Web Application</display-name>
+	<servlet>
+		<servlet-name>CategoriaController</servlet-name>
+		<display-name>CategoriaController</display-name>
+		<description></description>
+		<servlet-class>com.sinensia.controllers.CategoriaController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TramiteController</servlet-name>
+		<display-name>TramiteController</display-name>
+		<description></description>
+		<servlet-class>com.sinensia.controllers.TramiteController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoriaController</servlet-name>
+		<url-pattern>/CategoriaController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TramiteController</servlet-name>
+		<url-pattern>/TramiteController</url-pattern>
+	</servlet-mapping>
+	<listener>
+		<listener-class>
+			com.sinensia.controllers.MyAppServletContextListener
+		</listener-class>
+	</listener>
 </web-app>
