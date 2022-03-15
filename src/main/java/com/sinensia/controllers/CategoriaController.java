@@ -53,11 +53,14 @@ public class CategoriaController extends HttpServlet {
 		IDao<Categoria> categoriaDao = new CategoriaDao();
 		List<Categoria> categorias = categoriaDao.get();
 		
+		int i = 0;
 		for(Categoria c : categorias) {
-			if(c.isEsIngreso()) {
+			if(c.isEsIngreso() && mes == c.getListaTramites().get(i).getFecha().getMonthValue() &&
+					anyo == c.getListaTramites().get(i).getFecha().getYear()) {
 				c = insertaTramites(c);
 				lista.add(c);
 			}
+			i++;
 		}
 		return lista;
 	}
