@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sinensia.contracts.IDao;
-import com.sinensia.dao.CategoriaDao;
 import com.sinensia.dao.TramiteDao;
 import com.sinensia.model.Categoria;
 import com.sinensia.model.Tramite;
@@ -48,35 +47,47 @@ public class CategoriaController extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public static List<Categoria> getListaCategoriaIngresos(int mes, int anyo) throws SQLException {
-		List<Categoria> lista = new ArrayList<Categoria>();
-		IDao<Categoria> categoriaDao = new CategoriaDao();
-		List<Categoria> categorias = categoriaDao.get();
-		
+	public static List<Categoria> getListaCategoriaIngresos(List<Categoria> categorias, int mes, int anyo) throws SQLException {
+		List<Categoria> listaIngresosOrdenada = new ArrayList<Categoria>();
 		int i = 0;
 		for(Categoria c : categorias) {
-			if(c.isEsIngreso() && mes == c.getListaTramites().get(i).getFecha().getMonthValue() &&
-					anyo == c.getListaTramites().get(i).getFecha().getYear()) {
-				c = insertaTramites(c);
-				lista.add(c);
+			//Categorias debe tener su lista tramites de entrada
+			if(c.getListaTramites().size()>0) {
+				if(c.isEsIngreso() && mes == c.getListaTramites().get(i).getFecha().getMonthValue() &&
+						anyo == c.getListaTramites().get(i).getFecha().getYear()) {
+					listaIngresosOrdenada.add(c);
+				}
 			}
 			i++;
 		}
-		return lista;
+		return listaIngresosOrdenada;
+	}
+	
+	public static List<Categoria> getListaCategoriaGastos(List<Categoria> categorias, int mes, int anyo) throws SQLException {
+		List<Categoria> listaGastosOrdenada = new ArrayList<Categoria>();
+		
+		for(Categoria c : categorias) {
+			//Categorias debe tener su lista tramites de entrada
+			if(c.getListaTramites().size()>0) {
+				if(!c.isEsIngreso() && mes == c.getListaTramites().get(0).getFecha().getMonthValue() &&
+						anyo == c.getListaTramites().get(0).getFecha().getYear()) {
+					listaGastosOrdenada.add(c);
+				}
+			}
+		}
+		return listaGastosOrdenada;
 	}
 	
 	public static List<Categoria> getListaCategoriaOrdenada(List<Categoria> lista, int mes, int anyo) throws SQLException {
 		List<Double> valoresTotalesCategoria = new ArrayList<Double>();
-		int i = 0;
 		for(Categoria c: lista) {
-			valoresTotalesCategoria.set(i, getValorImportesCategoriaMes(c, mes, anyo));
-			i++;
+			valoresTotalesCategoria.add(getValorImportesCategoriaMes(c, mes, anyo));
 		}
 		valoresTotalesCategoria = valoresTotalesCategoria.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 		
 		List<Categoria> listaResultado = new ArrayList<Categoria>();
-		for(Categoria c : lista) {
-			for(int j=0; i<valoresTotalesCategoria.size(); j++) {
+		for(int j=0; j<valoresTotalesCategoria.size(); j++) {
+			for(Categoria c : lista) {
 				if(getValorImportesCategoriaMes(c, mes, anyo)==valoresTotalesCategoria.get(j)) {
 					listaResultado.add(c);
 				}
@@ -105,7 +116,7 @@ public class CategoriaController extends HttpServlet {
 		double total = 0;
 		for(Tramite t: listaTramites) {
 			if(t.getFecha().getMonthValue()==mes && t.getFecha().getYear()==anyo) {
-				total = t.getValor();
+				total += t.getValor();
 			}
 		}
 		total = Math.abs(total);
