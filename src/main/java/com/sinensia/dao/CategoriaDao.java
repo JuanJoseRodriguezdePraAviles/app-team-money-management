@@ -126,28 +126,7 @@ public class CategoriaDao extends BaseDao implements IDao<Categoria>{
 
 	@Override
 	public int remove(int id) throws SQLException {
-		int filasAfectadas = 0;
-		PreparedStatement preparedStatement = null;
-		
-		try {
-			connect = super.getconnection();
-			preparedStatement = connect.prepareStatement("DELETE FROM categoria WHERE categoriaId = ?;");
-			preparedStatement.setInt(1, id);
-
-			filasAfectadas = preparedStatement.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		} finally {
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
-			if (connect != null) {
-				connect.close();
-			}
-		}
-		return filasAfectadas;
+		return 0;
 	}
 
 }
