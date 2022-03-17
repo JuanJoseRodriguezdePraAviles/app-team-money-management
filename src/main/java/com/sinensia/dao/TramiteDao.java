@@ -77,8 +77,8 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 				tramite.setCategoriaId(rs.getInt("categoriaId"));
 				tramite.setConcepto(rs.getString("concepto"));
 				tramite.setFecha(rs.getDate("fecha").toLocalDate());
-				
-			} 
+				tramites.add(tramite);
+			}
 			
 			} catch (Exception e) {
 				e.printStackTrace();
