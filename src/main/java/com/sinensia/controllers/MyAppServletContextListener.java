@@ -31,6 +31,8 @@ public class MyAppServletContextListener implements ServletContextListener{
 			Categoria categoria3 = new Categoria();
 			Categoria categoria4 = new Categoria();
 			Categoria categoria5 = new Categoria();
+			Categoria categoria6 = new Categoria();
+			Categoria categoria7 = new Categoria();
 			
 			if(categorias.size() == 0) {
 				System.out.println("Las categorías no existen");
@@ -39,26 +41,36 @@ public class MyAppServletContextListener implements ServletContextListener{
 				categoria1.setEsIngreso(true);
 				
 				categoria2.setCategoriaId(2);
-				categoria2.setNombre("Comida");
-				categoria2.setEsIngreso(false);
+				categoria2.setNombre("Inversión");
+				categoria2.setEsIngreso(true);
 				
 				categoria3.setCategoriaId(3);
-				categoria3.setNombre("Transporte");
+				categoria3.setNombre("Préstamo");
 				categoria3.setEsIngreso(true);
 				
 				categoria4.setCategoriaId(4);
-				categoria4.setNombre("Hogar");
+				categoria4.setNombre("Comida");
 				categoria4.setEsIngreso(false);
 				
 				categoria5.setCategoriaId(5);
-				categoria5.setNombre("Ocio");
+				categoria5.setNombre("Transporte");
 				categoria5.setEsIngreso(false);
+				
+				categoria6.setCategoriaId(6);
+				categoria6.setNombre("Hogar");
+				categoria6.setEsIngreso(false);
+				
+				categoria7.setCategoriaId(7);
+				categoria7.setNombre("Ocio");
+				categoria7.setEsIngreso(false);
 				
 				categoriaDao.add(categoria1);
 				categoriaDao.add(categoria2);
 				categoriaDao.add(categoria3);
 				categoriaDao.add(categoria4);
-				categoriaDao.add(categoria5);	
+				categoriaDao.add(categoria5);
+				categoriaDao.add(categoria6);
+				categoriaDao.add(categoria7);
 			}
 			else {
 				System.out.println("Las categorías ya existen");
