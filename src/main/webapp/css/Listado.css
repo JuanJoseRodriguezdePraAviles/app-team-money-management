@@ -1,7 +1,8 @@
 .botones {
   	width: 100%;
   	max-width: 2400px;
-  	
+  	margin-top: 2%;
+  	margin-left: 7.5%;
 }
 .boton {
   opacity: 0.8;
@@ -17,7 +18,5 @@
   text-decoration: none;
   vertical-align: middle;
   line-height: 100%;
-  margin-right: 10%;
-  margin-left: 10%;
 }
 

@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Página inicial</title>
+	<title>AppTeamMoney</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -66,6 +66,7 @@
 				  	</li>
 				<%}%>
 			</ul>
+			<p>Los gastos en este mes son: <%=totalCategoriasGastos%>&#8364;</p>
 		</div>
 		<div class="rounded border border-success listaCategorias">
 			<h3>Ingresos</h3>
@@ -79,7 +80,10 @@
 				  	</li>
 				<%}%>
 			</ul>
-	<div class="d-flex justify-content-center botones">
+			<p>Los ingresos en este mes son: <%=totalCategoriasIngresos%>&#8364;</p>
+		</div>
+	</div>
+	<div class="d-flex justify-content-around botones">
 		<div class="boton">
 			<a class="btn btn-danger" href="NuevoTramite.jsp" role="button" onclick="esGasto()">Gastos</a>
 		</div>
