@@ -28,4 +28,6 @@ git init . on project folder
 
 Ejecutar script de BBDD con BBDD local
 
-
+Enlaces:
+- Página de diseño: https://app.moqups.com/Cj33n6MpervK6qYAKICbvHT5bEkBruqt/edit/page/ae8fe8eb0
+- Página de heroku: https://app-team-money.herokuapp.com/
