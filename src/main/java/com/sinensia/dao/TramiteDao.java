@@ -64,11 +64,12 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 		
 		List<Tramite> tramites = new ArrayList<Tramite>();
 		PreparedStatement preparedStatement=null;
+		ResultSet rs = null;
 		try {
 			connect=super.getconnection();
 			preparedStatement=connect.prepareStatement("SELECT * FROM tramite");
 			
-			ResultSet rs=preparedStatement.executeQuery();
+			rs=preparedStatement.executeQuery();
 			
 			while (rs.next()) {
 				Tramite tramite= new Tramite();
@@ -83,6 +84,14 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw e;
+			} finally {
+				if (preparedStatement !=null)
+					preparedStatement.close();
+				if (rs != null)
+					rs.close();
+				if (connect != null)
+					connect.close();
+				
 			}
 		
 		return tramites;
