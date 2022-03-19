@@ -22,9 +22,6 @@
 	        <li class="nav-item">
 	          <a class="nav-link" href="ResumenMes.jsp">Resumen del mes</a>
 	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="NuevoTramite.jsp">Nuevo trámite</a>
-	        </li>
 	      </ul>
 	    </div>
 	  </div>
