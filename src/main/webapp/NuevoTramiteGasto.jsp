@@ -48,31 +48,28 @@
 	<div class="principalDiv">
 		<h1><%=fechaCompleta%></h1>
 		<div class="container mt-3">
+			<form  method="post" action="tramite">
 			<div class="d-flex centerDiv">
 				<input type="number" class="form-control leftColumnConfig" id="importe" placeholder="Importe" name="importe">
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="opciones" id="gasto" value="gasto">
-					<label class="form-check-label gastoColor" for="gasto">Gasto</label>
-				</div>
-				<div class="form-check form-check-inline ingresoSpace">
-					<input class="form-check-input" type="radio" name="opciones" id="ingreso" value="ingreso">
-					<label class="form-check-label ingresoColor" for="ingreso">Ingreso</label>
-				</div>
 			</div>
 			<div class="d-flex centerDiv">
-				<textarea class="form-control leftColumnConfig" id="concepto" rows="3" placeholder="Concepto"></textarea>
+				<textarea class="form-control leftColumnConfig" id="concepto" rows="3" placeholder="Concepto" name="concepto"></textarea>
 				<div class="dateSelectSize">
 					<input type="date" class="form-control" id="fechaTramite" value="<%=fechaActual%>" name="fechaTramite">
-					<select id="categoriaEscogida" class="form-select"
+					<select name="categoriaEscogida" class="form-select"
 						aria-label="Default select example">
 						<option selected>Tipo de categoría</option>
 						<%for (Categoria categoria : categorias) {%>
-							<option value=<%=categoria.getCategoriaId()%>><%=categoria.getNombre()%></option>
+							<%if(!categoria.isEsIngreso()){ %>
+								<option value=<%=categoria.getCategoriaId()%>><%=categoria.getNombre()%></option>
+							<%} %>
 						<%}%>
 					</select>
 				</div>
 			</div>
-			<button class="btn btn-primary addTramite" onclick="mensajeImporte()">Agregar trámite</button>
+			<input class = "btn btn-primary addTramite" type="submit" name="submit" value="Agregar trámite">
+			</form>
+			
 			<p id="mensajeImporte"></p>
 		</div>
 	</div>
