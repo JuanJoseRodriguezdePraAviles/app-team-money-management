@@ -99,5 +99,13 @@
 			<%=totalIngresos-totalGastos %></h3>
 
 	</div>
+	<div class="d-flex justify-content-around botones">
+		<div class="boton">
+			<a class="btn btn-danger" href="NuevoTramiteGasto.jsp" role="button" onclick="esGasto()">Gastos</a>
+		</div>
+		<div class="boton">
+			<a class="btn btn-success" href="NuevoTramiteIngreso.jsp" role="button" onclick="esIngreso()">Ingresos</a>
+		</div>
+	</div>
 </body>
 </html>
