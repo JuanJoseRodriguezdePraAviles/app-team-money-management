@@ -76,8 +76,8 @@ public class TramiteController extends HttpServlet {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		//response.sendRedirect("https://app-team-money.herokuapp.com/");
-		response.sendRedirect("http://localhost:8080/app-team-money-management/index.jsp");
+		
+		response.sendRedirect("index.jsp");
 	}
 
 }
