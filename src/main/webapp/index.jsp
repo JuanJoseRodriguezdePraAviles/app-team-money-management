@@ -7,6 +7,8 @@
 <%@ page import="com.sinensia.model.Categoria" %>
 <%@ page import="com.sinensia.controllers.CategoriaController" %>
 <%@ page import="com.sinensia.dao.CategoriaDao" %>
+<%@ page import="java.math.BigDecimal"%>
+<%@ page import="java.math.RoundingMode"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +25,8 @@
 	<%double totalCategoriasGastos = 0;%>
 	<%double totalCategoriasIngresos = 0;%>
 	<%double totalCategoria = 0;%>
+	<%double porcentajeGastos = 0;%>
+	<%double porcentajeIngresos = 0;%>
 	
 	<%LocalDate fechaActual = LocalDate.now();%>
 	<%Locale fechaEs = new Locale("es", "ES");%>
@@ -59,10 +63,12 @@
 			<ul class="list-group">
 				<%for (Categoria categoria : categoriasGastos) {%>
 					<%totalCategoria = CategoriaController.getValorImportesCategoriaMes(categoria, mes, anyo);%>
-				  	<%double porcentajeGastos = totalCategoria / totalCategoriasGastos * 100; %>
+				  	<%porcentajeGastos = totalCategoria / totalCategoriasGastos * 100; %>
 					<li class="list-group-item d-flex justify-content-between align-items-center">
 					    <%=categoria.getNombre()%>
-					    <span class="badge bg-primary rounded-pill"><%=porcentajeGastos%>%</span>
+					    <%BigDecimal porcentaje = BigDecimal.valueOf(porcentajeGastos);%>
+    					<%porcentaje = porcentaje.setScale(2, RoundingMode.HALF_UP);%>
+					    <span class="badge bg-primary rounded-pill"><%=porcentaje.doubleValue()%>%</span>
 				  	</li>
 				<%}%>
 			</ul>
@@ -73,10 +79,12 @@
 			<ul class="list-group">
 			  	<%for (Categoria categoria : categoriasIngresos) {%>
 					<%totalCategoria = CategoriaController.getValorImportesCategoriaMes(categoria, mes, anyo);%>
-				  	<%double porcentajeGastos = totalCategoria / totalCategoriasIngresos * 100; %>
+				  	<%porcentajeIngresos = totalCategoria / totalCategoriasIngresos * 100; %>
 					<li class="list-group-item d-flex justify-content-between align-items-center">
 					    <%=categoria.getNombre()%>
-					    <span class="badge bg-primary rounded-pill"><%=porcentajeGastos%>%</span>
+					    <%BigDecimal porcentaje = BigDecimal.valueOf(porcentajeIngresos);%>
+    					<%porcentaje = porcentaje.setScale(2, RoundingMode.HALF_UP);%>
+					    <span class="badge bg-primary rounded-pill"><%=porcentaje.doubleValue()%>%</span>
 				  	</li>
 				<%}%>
 			</ul>

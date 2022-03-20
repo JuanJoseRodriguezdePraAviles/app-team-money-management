@@ -17,7 +17,7 @@
 	    <div class="collapse navbar-collapse" id="navbarResponsive">
 	      <ul class="navbar-nav ms-auto">
 	        <li class="nav-item active">
-	          <a class="nav-link" href="Categorias.jsp">Categorías</a>
+	          <a class="nav-link" href="ListadoCategorias.jsp">Categorías</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link" href="ResumenMes.jsp">Resumen del mes</a>
