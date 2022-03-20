@@ -1,3 +1,5 @@
+<%@page import="com.sinensia.services.CategoriaService"%>
+<%@page import="com.sinensia.services.TramiteService"%>
 <%@page import="com.sinensia.dao.CategoriaDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -37,11 +39,11 @@
 	<%String fechaCompleta = fechaActual.format(DateTimeFormatter.ofPattern("MMMM yyyy", fechaEs)); %>
 	<%String mesActual = fechaActual.format(DateTimeFormatter.ofPattern("MMM", fechaEs)); %>
 
-	<%TramiteDao tramiteDao = new TramiteDao();%>
-	<%List<Tramite> tramites = tramiteDao.get();%>
+	<%TramiteService tramiteService = new TramiteService();%>
+	<%List<Tramite> tramites = tramiteService.get();%>
 
-	<%CategoriaDao categoriaDao = new CategoriaDao();%>
-	<%List<Categoria> categorias = categoriaDao.get();%>
+	<%CategoriaService categoriaService = new CategoriaService();%>
+	<%List<Categoria> categorias = categoriaService.get();%>
 
 	<%for(Categoria categoria : categorias){%>
 	<%categoria = CategoriaController.insertaTramites(categoria);%>
@@ -84,8 +86,7 @@
 								<td scope="row"><%= tramite.getFecha().getDayOfMonth()%> <%=mesActual%></td>
 								<td><%=categoria.getNombre()%></td>
 								<td><%=tramite.getConcepto()%></td>
-								<td><%= tramite.getValor() %></td>
-			
+								<td><%= tramite.getValor() %></td>	
 							</tr>
 						<%} %>
 					<%} %>

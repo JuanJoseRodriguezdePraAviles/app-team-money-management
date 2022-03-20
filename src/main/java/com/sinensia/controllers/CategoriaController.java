@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sinensia.contracts.IDao;
-import com.sinensia.dao.TramiteDao;
 import com.sinensia.model.Categoria;
 import com.sinensia.model.Tramite;
+import com.sinensia.services.TramiteService;
 
 /**
  * Servlet implementation class CategoriaController
@@ -98,8 +97,8 @@ public class CategoriaController extends HttpServlet {
 	}
 	
 	public static Categoria insertaTramites(Categoria categoria) throws SQLException {
-		IDao<Tramite> tramiteDao = new TramiteDao();
-		List<Tramite> listaTramites = tramiteDao.get();
+		TramiteService tramiteService = new TramiteService();
+		List<Tramite> listaTramites = tramiteService.get();
 		List<Tramite> tramitesInsertar = new ArrayList<Tramite>();
 		
 		for(Tramite t : listaTramites) {

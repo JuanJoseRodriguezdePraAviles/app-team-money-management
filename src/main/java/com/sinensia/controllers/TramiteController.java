@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.sinensia.contracts.IDao;
 import com.sinensia.dao.TramiteDao;
 import com.sinensia.model.Tramite;
+import com.sinensia.services.TramiteService;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -70,7 +72,7 @@ public class TramiteController extends HttpServlet {
 		tramite.setFecha(fecha);
 		tramite.setCategoriaId(idCategoria);
 		
-		IDao<Tramite> listaITramiteDao = new TramiteDao();
+		TramiteService listaITramiteDao = new TramiteService();
 		try {
 			listaITramiteDao.add(tramite);
 		} catch(SQLException e) {
