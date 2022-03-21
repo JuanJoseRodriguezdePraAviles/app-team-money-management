@@ -10,14 +10,8 @@
 	margin-right: 5%;
 	margin-bottom: 2%;
 }
-.gastoColor {
-	color: red;
-}
 .ingresoSpace {
 	margin-left: 5%;
-}
-.ingresoColor {
-	color: green;
 }
 .dateSelectSize {
 	width: 23%;
@@ -27,4 +21,7 @@
 }
 .addTramite {
 	width: 36%;
+}
+#importe {
+	width: 53%;
 }

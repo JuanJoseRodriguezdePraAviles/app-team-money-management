@@ -25,18 +25,6 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<script>
-        function mensajeImporte() {
-			if(document.querySelector('input[id="gasto"]:checked')) {
-				document.getElementById("mensajeImporte").style.color = "red";
-				document.getElementById("mensajeImporte").innerHTML = "Gasto agregado correctamente";
-			}
-			else{
-				document.getElementById("mensajeImporte").style.color = "green";
-				document.getElementById("mensajeImporte").innerHTML = "Ingreso agregado correctamente";
-			}
-        }
-    </script>
 </head>
 <body>
 	<%LocalDate fechaActual = LocalDate.now(); %>
