@@ -77,8 +77,7 @@
 					<th scope="col">Importe</th>
 				</tr>
 			</thead>
-			<tbody>
-
+				<tbody>
 				<%for(Tramite tramite : tramites){%>
 					<%for(Categoria categoria: categorias){%>
 						<%if (tramite.getCategoriaId() == categoria.getCategoriaId()){%>
@@ -86,12 +85,15 @@
 								<td scope="row"><%= tramite.getFecha().getDayOfMonth()%> <%=mesActual%></td>
 								<td><%=categoria.getNombre()%></td>
 								<td><%=tramite.getConcepto()%></td>
-								<td><%= tramite.getValor() %></td>	
+								<%if (categoria.isEsIngreso()== true){ %>
+									<td style="color: green;">+ <%= tramite.getValor() %></td>	
+								<%} else{ %>
+									<td style="color: red;">- <%= tramite.getValor() %></td>
+								<%} %>
 							</tr>
 						<%} %>
 					<%} %>
 				<%} %>
-
 			</tbody>
 		</table>
 
