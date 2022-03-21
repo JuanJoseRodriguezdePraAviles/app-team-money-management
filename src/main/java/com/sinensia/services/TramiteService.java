@@ -8,12 +8,11 @@ import com.sinensia.dao.TramiteDao;
 import com.sinensia.model.Tramite;
 
 public class TramiteService implements IDao<Tramite> {
-	private TramiteDao tramiteDao;
+	IDao<Tramite>tramiteDao = new TramiteDao();
 
 	@Override
 	public int add(Tramite tramite) throws SQLException {
 		 return tramiteDao.add(tramite);
-		
 	}
 
 	@Override
@@ -24,7 +23,6 @@ public class TramiteService implements IDao<Tramite> {
 
 	@Override
 	public List<Tramite> get() throws SQLException {
-		IDao<Tramite>tramiteDao = new TramiteDao();
 		return tramiteDao.get();
 	}
 

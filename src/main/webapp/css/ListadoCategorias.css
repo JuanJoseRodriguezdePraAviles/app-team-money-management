@@ -1,9 +1,13 @@
-.cuadrado{
-	height: 100px;
-	
+.titulos{
+	text-align: center;
+	margin-bottom: 2%;
+	margin-top: 2%;
 }
-.centrado {
-	margin-top:20%;
+.cardsStyle {
+	margin-bottom: 5%;
+	width: 18rem;
+	text-align: center;
+	margin-left: 15%;
 }
 .margen{
 }

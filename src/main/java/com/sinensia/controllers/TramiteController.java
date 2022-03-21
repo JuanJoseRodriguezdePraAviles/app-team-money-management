@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sinensia.contracts.IDao;
-import com.sinensia.dao.TramiteDao;
 import com.sinensia.model.Tramite;
 import com.sinensia.services.TramiteService;
 
@@ -56,7 +53,6 @@ public class TramiteController extends HttpServlet {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate fecha = null;
 		try {
-			String fechaTexto = request.getParameter("fechaTramite");
 			fecha = format.parse(request.getParameter("fechaTramite")).toInstant()
 		      .atZone(ZoneId.systemDefault())
 		      .toLocalDate();

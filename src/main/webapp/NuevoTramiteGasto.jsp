@@ -25,18 +25,6 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<script>
-        function mensajeImporte() {
-			if(document.querySelector('input[id="gasto"]:checked')) {
-				document.getElementById("mensajeImporte").style.color = "red";
-				document.getElementById("mensajeImporte").innerHTML = "Gasto agregado correctamente";
-			}
-			else{
-				document.getElementById("mensajeImporte").style.color = "green";
-				document.getElementById("mensajeImporte").innerHTML = "Ingreso agregado correctamente";
-			}
-        }
-    </script>
 </head>
 <body>
 	<%LocalDate fechaActual = LocalDate.now(); %>
@@ -49,25 +37,25 @@
 		<h1><%=fechaCompleta%></h1>
 		<div class="container mt-3">
 			<form  method="post" action="tramite">
-			<div class="d-flex centerDiv">
-				<input type="number" class="form-control leftColumnConfig" id="importe" placeholder="Importe" name="importe">
-			</div>
-			<div class="d-flex centerDiv">
-				<textarea class="form-control leftColumnConfig" id="concepto" rows="3" placeholder="Concepto" name="concepto"></textarea>
-				<div class="dateSelectSize">
-					<input type="date" class="form-control" id="fechaTramite" value="<%=fechaActual%>" name="fechaTramite">
-					<select name="categoriaEscogida" class="form-select"
-						aria-label="Default select example">
-						<option selected>Tipo de categoría</option>
-						<%for (Categoria categoria : categorias) {%>
-							<%if(!categoria.isEsIngreso()){ %>
-								<option value=<%=categoria.getCategoriaId()%>><%=categoria.getNombre()%></option>
-							<%} %>
-						<%}%>
-					</select>
+				<div class="d-flex centerDiv">
+					<input type="number" class="form-control leftColumnConfig" id="importe" placeholder="Importe" name="importe">
 				</div>
-			</div>
-			<input class = "btn btn-primary addTramite" type="submit" name="submit" value="Agregar trámite">
+				<div class="d-flex centerDiv">
+					<textarea class="form-control leftColumnConfig" id="concepto" rows="3" placeholder="Concepto" name="concepto"></textarea>
+					<div class="dateSelectSize">
+						<input type="date" class="form-control" id="fechaTramite" value="<%=fechaActual%>" name="fechaTramite">
+						<select name="categoriaEscogida" class="form-select"
+							aria-label="Default select example">
+							<option selected>Tipo de categoría</option>
+							<%for (Categoria categoria : categorias) {%>
+								<%if(!categoria.isEsIngreso()){ %>
+									<option value=<%=categoria.getCategoriaId()%>><%=categoria.getNombre()%></option>
+								<%} %>
+							<%}%>
+						</select>
+					</div>
+				</div>
+				<input class = "btn btn-primary addTramite" type="submit" name="submit" value="Agregar trámite">
 			</form>
 			
 			<p id="mensajeImporte"></p>
