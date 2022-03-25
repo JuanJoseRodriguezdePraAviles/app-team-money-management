@@ -48,16 +48,17 @@ public class CategoriaController extends HttpServlet {
 	
 	public static List<Categoria> getListaCategoriaIngresos(List<Categoria> categorias, int mes, int anyo) throws SQLException {
 		List<Categoria> listaIngresosOrdenada = new ArrayList<Categoria>();
-		int i = 0;
 		for(Categoria c : categorias) {
 			//Categorias debe tener su lista tramites de entrada
 			if(c.getListaTramites().size()>0) {
-				if(c.isEsIngreso() && mes == c.getListaTramites().get(i).getFecha().getMonthValue() &&
-						anyo == c.getListaTramites().get(i).getFecha().getYear()) {
-					listaIngresosOrdenada.add(c);
+				for(int i=0;i<c.getListaTramites().size();i++) {
+					if(c.isEsIngreso() && mes == c.getListaTramites().get(i).getFecha().getMonthValue() &&
+							anyo == c.getListaTramites().get(i).getFecha().getYear()) {
+						listaIngresosOrdenada.add(c);
+						i=c.getListaTramites().size();
+					}
 				}
 			}
-			i++;
 		}
 		return listaIngresosOrdenada;
 	}
@@ -68,9 +69,12 @@ public class CategoriaController extends HttpServlet {
 		for(Categoria c : categorias) {
 			//Categorias debe tener su lista tramites de entrada
 			if(c.getListaTramites().size()>0) {
-				if(!c.isEsIngreso() && mes == c.getListaTramites().get(0).getFecha().getMonthValue() &&
-						anyo == c.getListaTramites().get(0).getFecha().getYear()) {
-					listaGastosOrdenada.add(c);
+				for(int i=0;i<c.getListaTramites().size();i++) {
+					if(!c.isEsIngreso() && mes == c.getListaTramites().get(i).getFecha().getMonthValue() &&
+							anyo == c.getListaTramites().get(i).getFecha().getYear()) {
+						listaGastosOrdenada.add(c);
+						i=c.getListaTramites().size();
+					}
 				}
 			}
 		}
