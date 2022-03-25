@@ -1,9 +1,15 @@
-.cuadrado{
-	height: 100px;
-	
+body {
+	background-color: #b3f0ff;
 }
-.centrado {
-	margin-top:20%;
+
+.titulos{
+	text-align: center;
+	margin-bottom: 2%;
+	margin-top: 2%;
 }
-.margen{
+.cardsStyle {
+	margin-bottom: 5%;
+	width: 18rem;
+	text-align: center;
+	margin-left: 15%;
 }

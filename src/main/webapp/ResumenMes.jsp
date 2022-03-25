@@ -1,3 +1,5 @@
+<%@page import="com.sinensia.services.CategoriaService"%>
+<%@page import="com.sinensia.services.TramiteService"%>
 <%@page import="com.sinensia.dao.CategoriaDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -21,7 +23,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="css/ListaCategorias.css" rel="stylesheet">
+<link href="css/ResumenIndexCSS.css" rel="stylesheet" type="text/css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -37,11 +39,11 @@
 	<%String fechaCompleta = fechaActual.format(DateTimeFormatter.ofPattern("MMMM yyyy", fechaEs)); %>
 	<%String mesActual = fechaActual.format(DateTimeFormatter.ofPattern("MMM", fechaEs)); %>
 
-	<%TramiteDao tramiteDao = new TramiteDao();%>
-	<%List<Tramite> tramites = tramiteDao.get();%>
+	<%TramiteService tramiteService = new TramiteService();%>
+	<%List<Tramite> tramites = tramiteService.get();%>
 
-	<%CategoriaDao categoriaDao = new CategoriaDao();%>
-	<%List<Categoria> categorias = categoriaDao.get();%>
+	<%CategoriaService categoriaService = new CategoriaService();%>
+	<%List<Categoria> categorias = categoriaService.get();%>
 
 	<%for(Categoria categoria : categorias){%>
 	<%categoria = CategoriaController.insertaTramites(categoria);%>
@@ -75,37 +77,38 @@
 					<th scope="col">Importe</th>
 				</tr>
 			</thead>
-			<tbody>
-
-				<%for(Tramite tramite : tramites){%>
-					<%for(Categoria categoria: categorias){%>
-						<%if (tramite.getCategoriaId() == categoria.getCategoriaId()){%>
+				<tbody>
+				<%for(Tramite tramite : tramites) {%>
+					<%for(Categoria categoria: categorias) {%>
+						<%if(tramite.getCategoriaId() == categoria.getCategoriaId()) {%>
 							<tr>
 								<td scope="row"><%= tramite.getFecha().getDayOfMonth()%> <%=mesActual%></td>
 								<td><%=categoria.getNombre()%></td>
 								<td><%=tramite.getConcepto()%></td>
-								<td><%= tramite.getValor() %></td>
-			
+								<%if(categoria.isEsIngreso()) { %>
+									<td id="ingresos">+ <%= tramite.getValor() %></td>	
+								<%} else{ %>
+									<td id="gastos">- <%= tramite.getValor() %></td>
+								<%} %>
 							</tr>
 						<%} %>
 					<%} %>
 				<%} %>
-
 			</tbody>
 		</table>
-
-		<h3 style="text-align: center;">
-			Saldo disponible:
-			<%=totalIngresos-totalGastos %></h3>
 
 	</div>
 	<div class="d-flex justify-content-around botones">
 		<div class="boton">
-			<a class="btn btn-danger" href="NuevoTramiteGasto.jsp" role="button" onclick="esGasto()">Gastos</a>
+			<a class="btn fw-bold" style="background: linear-gradient(#ff0000, #ff3300, #ff6600, #ff5050); color: white;" href="NuevoTramiteGasto.jsp" role="button" onclick="esGasto()">Gastos</a>
 		</div>
+		<h3 style="margin-right: 16%; margin-top: -0.5%;">
+			Saldo disponible:
+			<%=totalIngresos-totalGastos %></h3>
 		<div class="boton">
-			<a class="btn btn-success" href="NuevoTramiteIngreso.jsp" role="button" onclick="esIngreso()">Ingresos</a>
+			<a class="btn fw-bold" style="background: linear-gradient(#009900, #336600, #009933, #33cc33); color: white;" href="NuevoTramiteIngreso.jsp" role="button" onclick="esIngreso()">Ingresos</a>
 		</div>
 	</div>
+	<%@ include file="PieDePagina.jsp"%>
 </body>
 </html>

@@ -20,6 +20,8 @@ import com.sinensia.contracts.IDao;
 import com.sinensia.dao.TramiteDao;
 import com.sinensia.model.Categoria;
 import com.sinensia.model.Tramite;
+import com.sinensia.services.TramiteService;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,7 +61,6 @@ public class TramiteController extends HttpServlet {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate fecha = null;
 		try {
-			String fechaTexto = request.getParameter("fechaTramite");
 			fecha = format.parse(request.getParameter("fechaTramite")).toInstant()
 		      .atZone(ZoneId.systemDefault())
 		      .toLocalDate();
@@ -75,7 +76,7 @@ public class TramiteController extends HttpServlet {
 		tramite.setFecha(fecha);
 		tramite.setCategoriaId(idCategoria);
 		
-		IDao<Tramite> listaITramiteDao = new TramiteDao();
+		TramiteService listaITramiteDao = new TramiteService();
 		try {
 			listaITramiteDao.add(tramite);
 		} catch(SQLException e) {

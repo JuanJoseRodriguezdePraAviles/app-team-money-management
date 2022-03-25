@@ -20,23 +20,8 @@
 <link
 	href="css/NuevoTramite.css"
 	rel="stylesheet">
-<link
-	href="css/Listado.css"
-	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<script>
-        function mensajeImporte() {
-			if(document.querySelector('input[id="gasto"]:checked')) {
-				document.getElementById("mensajeImporte").style.color = "red";
-				document.getElementById("mensajeImporte").innerHTML = "Gasto agregado correctamente";
-			}
-			else{
-				document.getElementById("mensajeImporte").style.color = "green";
-				document.getElementById("mensajeImporte").innerHTML = "Ingreso agregado correctamente";
-			}
-        }
-    </script>
 </head>
 <body>
 	<%LocalDate fechaActual = LocalDate.now(); %>
@@ -47,7 +32,7 @@
 	<%@ include file="Cabecera.jsp"%>
 	<div class="principalDiv">
 		<h1><%=fechaCompleta%></h1>
-		<div class="container mt-3">
+		<div class="container" style="width: 23%; background: linear-gradient(#009900, #336600, #009933, #33cc33); padding: 0.5%; border-radius: 10px;">
 			<form  method="post" action="tramite">
 			<div class="d-flex centerDiv">
 				<input type="number" class="form-control leftColumnConfig" id="importe" placeholder="Importe" name="importe">
@@ -67,11 +52,10 @@
 					</select>
 				</div>
 			</div>
-			<input class = "btn btn-primary addTramite" type="submit" name="submit" value="Agregar trámite">
+			<input class = "btn addTramite" style="background-color: green; color: white;" type="submit" name="submit" value="Agregar ingreso">
 			</form>
-			
-			<p id="mensajeImporte"></p>
 		</div>
 	</div>
+	<%@ include file="PieDePagina.jsp"%>
 </body>
 </html>

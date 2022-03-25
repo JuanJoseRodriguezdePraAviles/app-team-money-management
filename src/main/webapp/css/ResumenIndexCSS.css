@@ -1,3 +1,7 @@
+body {
+	background-color: #b3f0ff;
+}
+
 .botones {
   	width: 100%;
   	max-width: 2400px;
@@ -20,6 +24,20 @@
   line-height: 100%;
 }
 
-#mensajeImporte {
+.fechaCompleta {
+	text-align: center;
 	margin-top: 2%;
+}
+
+.listaCategorias {
+	padding: 2%;
+	width: 25%;
+}
+
+#ingresos {
+	color: green;
+}
+
+#gastos {
+	color: red;
 }
