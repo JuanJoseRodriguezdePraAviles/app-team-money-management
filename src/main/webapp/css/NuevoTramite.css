@@ -1,27 +1,34 @@
+body {
+	background-color: #b3f0ff;
+}
+
 .principalDiv {
 	text-align: center;
 	margin-top: 2%;
 }
-.centerDiv {
-	margin-left: 32%;
-}
+
 .leftColumnConfig {
-	width: 25%;
-	margin-right: 5%;
+	margin-left: 2.5%;
 	margin-bottom: 2%;
+	background-color: #b3f0ff;
 }
 .ingresoSpace {
 	margin-left: 5%;
 }
-.dateSelectSize {
-	width: 23%;
-}
 #fechaTramite {
 	margin-bottom: 13%;
-}
-.addTramite {
-	width: 36%;
+	background-color: #b3f0ff;
 }
 #importe {
-	width: 53%;
+	width: 95.25%;
+}
+#concepto {
+	width: 45%;
+	margin-right: 5%;
+}
+.form-select {
+	background-color: #b3f0ff;
+}
+.addTramite {
+	width: 95%;
 }

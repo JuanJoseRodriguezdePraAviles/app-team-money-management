@@ -17,14 +17,11 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <link
 	href="css/NuevoTramite.css"
 	rel="stylesheet">
-<link
-	href="css/Listado.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<%LocalDate fechaActual = LocalDate.now(); %>
@@ -35,13 +32,13 @@
 	<%@ include file="Cabecera.jsp"%>
 	<div class="principalDiv">
 		<h1><%=fechaCompleta%></h1>
-		<div class="container mt-3">
+		<div class="container" style="width: 23%; background: linear-gradient(#ff0000, #ff3300, #ff6600, #ff5050); padding: 0.5%; border-radius: 10px;">
 			<form  method="post" action="tramite">
 				<div class="d-flex centerDiv">
 					<input type="number" class="form-control leftColumnConfig" id="importe" placeholder="Importe" name="importe">
 				</div>
 				<div class="d-flex centerDiv">
-					<textarea class="form-control leftColumnConfig" id="concepto" rows="3" placeholder="Concepto" name="concepto"></textarea>
+					<textarea class="form-control leftColumnConfig" id="concepto" rows="3" placeholder="Concepto" name="concepto" maxlength="14"></textarea>
 					<div class="dateSelectSize">
 						<input type="date" class="form-control" id="fechaTramite" value="<%=fechaActual%>" name="fechaTramite">
 						<select name="categoriaEscogida" class="form-select"
@@ -55,11 +52,10 @@
 						</select>
 					</div>
 				</div>
-				<input class = "btn btn-primary addTramite" type="submit" name="submit" value="Agregar trámite">
+				<input class="btn addTramite" style="background-color: red; color: white;" type="submit" name="submit" value="Agregar gasto">
 			</form>
-			
-			<p id="mensajeImporte"></p>
 		</div>
 	</div>
+	<%@ include file="PieDePagina.jsp"%>
 </body>
 </html>
