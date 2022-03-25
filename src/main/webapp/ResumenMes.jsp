@@ -23,7 +23,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="css/ListaCategorias.css" rel="stylesheet">
+<link href="css/ResumenIndexCSS.css" rel="stylesheet" type="text/css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -78,17 +78,17 @@
 				</tr>
 			</thead>
 				<tbody>
-				<%for(Tramite tramite : tramites){%>
-					<%for(Categoria categoria: categorias){%>
-						<%if (tramite.getCategoriaId() == categoria.getCategoriaId()){%>
+				<%for(Tramite tramite : tramites) {%>
+					<%for(Categoria categoria: categorias) {%>
+						<%if(tramite.getCategoriaId() == categoria.getCategoriaId()) {%>
 							<tr>
 								<td scope="row"><%= tramite.getFecha().getDayOfMonth()%> <%=mesActual%></td>
 								<td><%=categoria.getNombre()%></td>
 								<td><%=tramite.getConcepto()%></td>
-								<%if (categoria.isEsIngreso()== true){ %>
-									<td style="color: green;">+ <%= tramite.getValor() %></td>	
+								<%if(categoria.isEsIngreso()) { %>
+									<td id="ingresos">+ <%= tramite.getValor() %></td>	
 								<%} else{ %>
-									<td style="color: red;">- <%= tramite.getValor() %></td>
+									<td id="gastos">- <%= tramite.getValor() %></td>
 								<%} %>
 							</tr>
 						<%} %>
@@ -97,18 +97,18 @@
 			</tbody>
 		</table>
 
-		<h3 style="text-align: center;">
-			Saldo disponible:
-			<%=totalIngresos-totalGastos %></h3>
-
 	</div>
 	<div class="d-flex justify-content-around botones">
 		<div class="boton">
-			<a class="btn btn-danger" href="NuevoTramiteGasto.jsp" role="button" onclick="esGasto()">Gastos</a>
+			<a class="btn fw-bold" style="background: linear-gradient(#ff0000, #ff3300, #ff6600, #ff5050); color: white;" href="NuevoTramiteGasto.jsp" role="button" onclick="esGasto()">Gastos</a>
 		</div>
+		<h3 style="margin-right: 16%; margin-top: -0.5%;">
+			Saldo disponible:
+			<%=totalIngresos-totalGastos %></h3>
 		<div class="boton">
-			<a class="btn btn-success" href="NuevoTramiteIngreso.jsp" role="button" onclick="esIngreso()">Ingresos</a>
+			<a class="btn fw-bold" style="background: linear-gradient(#009900, #336600, #009933, #33cc33); color: white;" href="NuevoTramiteIngreso.jsp" role="button" onclick="esIngreso()">Ingresos</a>
 		</div>
 	</div>
+	<%@ include file="PieDePagina.jsp"%>
 </body>
 </html>
