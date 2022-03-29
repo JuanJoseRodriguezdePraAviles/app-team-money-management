@@ -26,8 +26,30 @@
 <link href="css/ResumenIndexCSS.css" rel="stylesheet" type="text/css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<script type="text/javascript" src="paging.js"></script> 
+	
+	
+<script type="text/javascript" src="jquery.dataTables.js"></script>
+<script type="text/javascript" src="dataTables.scrollingPagination.js"></script>
+    
+    
+    <script type="text/javascript"
+charset="utf-8" src="/datatables/media/js/jquery.js"></script>
+<script type="text/javascript"
+charset="utf-8" src="/datatables/media/js/jquery.datatables.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript"
+charset="utf-8" src="/datatables/media/js/jquery.js"></script>
+<script type="text/javascript"
+charset="utf-8" src="/datatables/media/js/jquery.datatables.js"></script>
 
 </head>
+
 <body>
 
 	<%double tramiteMes= 0; %>
@@ -68,7 +90,8 @@
 	<%@ include file="Cabecera.jsp"%>
 	<h1 class="fechaCompleta"><%=fechaCompleta%></h1>
 	<div class="mx-auto" style="width: 75%">
-		<table class="table">
+		<table class="table" id="tabla">
+		
 			<thead>
 				<tr>
 					<th scope="col">Día</th>
@@ -96,8 +119,17 @@
 				<%} %>
 			</tbody>
 		</table>
-
 	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+ $('#tabla').DataTable({
+ "pageLength":10
+});
+});
+</script>
+	
 	<div class="d-flex justify-content-around botones">
 		<div class="boton">
 			<a class="btn fw-bold" style="background: linear-gradient(#ff0000, #ff3300, #ff6600, #ff5050); color: white;" href="NuevoTramiteGasto.jsp" role="button" onclick="esGasto()">Gastos</a>
@@ -105,6 +137,7 @@
 		<h3 style="margin-right: 16%; margin-top: -0.5%;">
 			Saldo disponible:
 			<%=totalIngresos-totalGastos %></h3>
+			
 		<div class="boton">
 			<a class="btn fw-bold" style="background: linear-gradient(#009900, #336600, #009933, #33cc33); color: white;" href="NuevoTramiteIngreso.jsp" role="button" onclick="esIngreso()">Ingresos</a>
 		</div>
