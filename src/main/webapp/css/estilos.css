@@ -1,0 +1,206 @@
+body {
+	background-color: #b3f0ff;
+}
+
+.fechaCompleta {
+	text-align: center;
+	margin-top: 2%;
+}
+
+.botones {
+  	width: 100%;
+  	max-width: 2400px;
+  	margin-top: 2%;
+  	margin-left: 7.5%;
+}
+.boton {
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	color: white;
+	font-size: 1.5vw;
+	padding: 1% 5%;
+	border: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	line-height: 100%;
+}
+
+.botonGastos {
+	background: linear-gradient(#ff0000, #ff3300, #ff6600, #ff5050);
+	color: white;
+}
+
+.botonIngresos {
+	background: linear-gradient(#009900, #336600, #009933, #33cc33);
+	color: white;
+}
+
+.fondoGastos {
+	background: linear-gradient(#ff0000, #ff3300, #ff6600, #ff5050);
+}
+
+.fondoIngresos {
+	background: linear-gradient(#009900, #336600, #009933, #33cc33);
+}
+
+/* Cabecera */
+#colorDeTextoATM {
+	color: white;
+}
+
+#colorDeTextoLC {
+	color: white;
+}
+
+#colorDeTextoRM {
+	color: white;
+}
+
+/* Index */
+.fondoDeLaTabla {
+	background-color: #e6e6e6;
+}
+
+.listaCategorias {
+	padding: 2%;
+	width: 25%;
+}
+
+.colorDeTextoTramites {
+	color: white;
+}
+
+.porcentajeGastos {
+	background-color: #e6e6e6;
+	color: red;
+}
+
+.porcentajeIngresos {
+	background-color: #e6e6e6;
+	color: green;
+}
+
+.colorTextoTablaGastos {
+	color: red;
+}
+
+.colorTextoTablaIngresos {
+	color: green;
+}
+
+/* Resumen del mes */
+.anchoDeLaTabla {
+	width: 75%;
+}
+
+#ingresos {
+	color: green;
+}
+
+#gastos {
+	color: red;
+}
+
+.saldoDisponible {
+	margin-right: 16%;
+	margin-top: -0.5%;
+}
+
+/* Listado de categorías */
+.titulos{
+	text-align: center;
+	margin-bottom: 2%;
+	margin-top: 2%;
+}
+.cardsStyle {
+	margin-bottom: 5%;
+	width: 18rem;
+	text-align: center;
+	margin-left: 15%;
+	color: white;
+}
+
+.botonMovimientoGastos {
+	background-color: #e6e6e6;
+	color: red;
+}
+
+.fondoTabla {
+	background-color: #b3f0ff;
+}
+
+.botonMovimientoIngresos {
+	background-color: #e6e6e6;
+	color: green;
+}
+
+.colorTituloModal {
+	color: black;
+}
+
+/* Nuevo trámite */
+.principalDiv {
+	text-align: center;
+	margin-top: 2%;
+}
+
+.contenedorGastos {
+	width: 23%;
+	background: linear-gradient(#ff0000, #ff3300, #ff6600, #ff5050);
+	padding: 0.5%;
+	border-radius: 10px;
+}
+
+.leftColumnConfig {
+	margin-left: 2.5%;
+	margin-bottom: 2%;
+	background-color: #b3f0ff;
+}
+
+#fechaTramite {
+	margin-bottom: 13%;
+	background-color: #b3f0ff;
+}
+#importe {
+	width: 95.25%;
+}
+#concepto {
+	width: 45%;
+	margin-right: 5%;
+}
+.form-select {
+	background-color: #b3f0ff;
+}
+.addTramiteGastos {
+	width: 95%;
+	background-color: red;
+	color: white;
+}
+
+.contenedorIngresos {
+	width: 23%;
+	background: linear-gradient(#009900, #336600, #009933, #33cc33);
+	padding: 0.5%;
+	border-radius: 10px;
+}
+
+.addTramiteIngresos {
+	width: 95%;
+	background-color: green;
+	color: white;
+}
+
+/* Pie de página */
+#posicionFooter {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+}
+
+#textoCopyright {
+	color: white;
+}

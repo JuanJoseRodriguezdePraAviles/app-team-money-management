@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ include file="init.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<footer class="footer mt-auto py-3 bg-primary shadow" style="position:fixed; bottom:0px; width: 100%;">
+	<footer class="footer mt-auto py-3 bg-primary shadow" id="posicionFooter">
 	  <div class="container text-center">
-	    <span style="color: white;">© 2022 AppTeamMoney. Todos los derechos reservados.</span>
+	    <span id="textoCopyright">© 2022 AppTeamMoney. Todos los derechos reservados.</span>
 	  </div>
 	</footer>
 </body>

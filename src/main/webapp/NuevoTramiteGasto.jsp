@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ include file="init.jsp"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.util.Locale" %>
@@ -11,29 +12,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<title>Nuevo trámite</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<link
-	href="css/NuevoTramite.css"
-	rel="stylesheet">
+	<title>Nuevo gasto</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<%LocalDate fechaActual = LocalDate.now(); %>
-	<%Locale fechaEs = new Locale("es", "ES"); %>
-	<%String fechaCompleta = fechaActual.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", fechaEs)); %>
+	<%LocalDate fechaActual = LocalDate.now();%>
+	<%Locale fechaEs = new Locale("es", "ES");%>
+	<%String fechaCompleta = fechaActual.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", fechaEs));%>
 	<%CategoriaDao categoriaDao = new CategoriaDao();%>
 	<%List<Categoria> categorias = categoriaDao.get();%>
 	<%@ include file="Cabecera.jsp"%>
 	<div class="principalDiv">
 		<h1><%=fechaCompleta%></h1>
-		<div class="container" style="width: 23%; background: linear-gradient(#ff0000, #ff3300, #ff6600, #ff5050); padding: 0.5%; border-radius: 10px;">
-			<form  method="post" action="tramite">
+		<div class="container contenedorGastos">
+			<form method="post" action="tramite">
 				<div class="d-flex centerDiv">
 					<input type="number" class="form-control leftColumnConfig" id="importe" placeholder="Importe" name="importe">
 				</div>
@@ -41,10 +34,9 @@
 					<textarea class="form-control leftColumnConfig" id="concepto" rows="3" placeholder="Concepto" name="concepto" maxlength="14"></textarea>
 					<div class="dateSelectSize">
 						<input type="date" class="form-control" id="fechaTramite" value="<%=fechaActual%>" name="fechaTramite">
-						<select name="categoriaEscogida" class="form-select"
-							aria-label="Default select example">
+						<select name="categoriaEscogida" class="form-select" aria-label="Default select example">
 							<option selected>Tipo de categoría</option>
-							<%for (Categoria categoria : categorias) {%>
+							<%for(Categoria categoria : categorias) {%>
 								<%if(!categoria.isEsIngreso()){ %>
 									<option value=<%=categoria.getCategoriaId()%>><%=categoria.getNombre()%></option>
 								<%} %>
@@ -52,10 +44,11 @@
 						</select>
 					</div>
 				</div>
-				<input class="btn addTramite" style="background-color: red; color: white;" type="submit" name="submit" value="Agregar gasto">
+				<input class="btn addTramiteGastos" type="submit" name="submit" value="Agregar gasto">
 			</form>
 		</div>
 	</div>
+	
 	<%@ include file="PieDePagina.jsp"%>
 </body>
 </html>
