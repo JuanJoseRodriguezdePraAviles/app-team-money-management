@@ -250,6 +250,5 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 		
 		return tramites;
 	}
-	
 
 }

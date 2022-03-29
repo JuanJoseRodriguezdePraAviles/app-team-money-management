@@ -14,8 +14,12 @@ public interface IDao<T> {
 	public T getById(int id) throws SQLException;
 	
 	public int remove(int id) throws SQLException;
-	
+
 	public int agregar(T modelo) throws SQLException;
 
-    public List<T> obtener() throws SQLException;
+	public int add(T modelo, boolean configuracion) throws SQLException;
+
+	public List<T> get(boolean configuracion) throws SQLException;
+
+	public List<T> obtener() throws SQLException;
 }
