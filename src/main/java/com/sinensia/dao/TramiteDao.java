@@ -209,11 +209,11 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 			connect=super.getconnection();
 			statement=(CallableStatement) connect.prepareCall("{call obtenerTramites()}");
 	 
-	            statement.registerOutParameter(1, Types.INTEGER);
+	            /*statement.registerOutParameter(1, Types.INTEGER);
 	            statement.registerOutParameter(2, Types.DOUBLE);
 	            statement.registerOutParameter(3, Types.DATE);
 	            statement.registerOutParameter(4, Types.INTEGER);
-	            statement.registerOutParameter(5, Types.VARCHAR);
+	            statement.registerOutParameter(5, Types.VARCHAR);*/
 			
 	            rs=statement.executeQuery();
 	            
@@ -231,7 +231,7 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 				tramite.setCategoriaId(categoriaId);
 				tramite.setConcepto(concepto);
 				tramite.setFecha(fecha.toLocalDate());
-				
+				tramites.add(tramite);
 				
 			}
 			
@@ -249,6 +249,18 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 			}
 		
 		return tramites;
+	}
+
+	@Override
+	public int add(Tramite modelo, boolean configuracion) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Tramite> get(boolean configuracion) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
