@@ -9,10 +9,14 @@ import com.sinensia.model.Tramite;
 
 public class TramiteService implements IDao<Tramite> {
 	IDao<Tramite>tramiteDao = new TramiteDao();
-
+	
 	@Override
-	public int add(Tramite tramite) throws SQLException {
-		 return tramiteDao.add(tramite);
+	public int add(Tramite tramite, boolean configuracion) throws SQLException {
+		if(configuracion)
+			return tramiteDao.add(tramite);
+		else
+			return tramiteDao.agregar(tramite);
+			
 	}
 
 	@Override
@@ -21,9 +25,11 @@ public class TramiteService implements IDao<Tramite> {
 		return 0;
 	}
 
-	@Override
-	public List<Tramite> get() throws SQLException {
-		return tramiteDao.get();
+	public List<Tramite> get(boolean configuracion) throws SQLException {
+		if(configuracion)
+			return tramiteDao.get();
+		else
+			return tramiteDao.obtener();
 	}
 
 	@Override
@@ -34,6 +40,30 @@ public class TramiteService implements IDao<Tramite> {
 	@Override
 	public int remove(int id) throws SQLException {
 		return tramiteDao.remove(id);
+	}
+
+	@Override
+	public int add(Tramite modelo) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Tramite> get() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int agregar(Tramite tramite) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Tramite> obtener() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -154,6 +154,33 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 		return filasAfectadas;
 	}
 	
+
+	@Override
+	public int add(Tramite tramite, boolean configuracion) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int agregar(Tramite tramite) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Tramite> get(boolean configuracion) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Tramite> obtener() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	  
+	
 	
 
 }
