@@ -39,7 +39,6 @@ charset="utf-8" src="/datatables/media/js/jquery.js"></script>
 <script type="text/javascript"
 charset="utf-8" src="/datatables/media/js/jquery.datatables.js"></script>
 
-
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
@@ -52,8 +51,6 @@ charset="utf-8" src="/datatables/media/js/jquery.datatables.js"></script>
 </head>
 
 <body>
-
-
 
 	<%double tramiteMes= 0; %>
 	<%double totalGastos = 0;%>
@@ -122,9 +119,7 @@ charset="utf-8" src="/datatables/media/js/jquery.datatables.js"></script>
 				<%} %>
 			</tbody>
 		</table>
-
 	</div>
-	
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script>
@@ -132,9 +127,8 @@ $(document).ready(function() {
  $('#tabla').DataTable({
  "pageLength":10
 });
-} );
+});
 </script>
-	
 	
 	<div class="d-flex justify-content-around botones">
 		<div class="boton">
@@ -144,8 +138,6 @@ $(document).ready(function() {
 			Saldo disponible:
 			<%=totalIngresos-totalGastos %></h3>
 			
-
-
 		<div class="boton">
 			<a class="btn fw-bold" style="background: linear-gradient(#009900, #336600, #009933, #33cc33); color: white;" href="NuevoTramiteIngreso.jsp" role="button" onclick="esIngreso()">Ingresos</a>
 		</div>
