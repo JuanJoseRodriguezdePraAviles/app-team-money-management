@@ -109,9 +109,26 @@
 							</thead>
 							<tbody>
 								<tr>
+									<% categoriasGastos = CategoriaController.getListaCategoriaGastos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<% categoriasIngresos = CategoriaController.getListaCategoriaIngresos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<%totalCategoriasGastos=0; %>
+									<%totalCategoriasIngresos=0; %>
+									<%for (Categoria categoria : categoriasGastos) {%>
+									<%totalCategoria = CategoriaController.getValorImportesCategoriaMes(categoria, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<%totalCategoriasGastos += totalCategoria; %>
+									<%}%>
+								
+									<%for (Categoria categoria : categoriasIngresos) {%>
+									<%totalCategoria = CategoriaController.getValorImportesCategoriaMes(categoria, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<%totalCategoriasIngresos += totalCategoria; %>
+									<%}%>
+									<%categoriasGastos = CategoriaController.getListaCategoriaGastos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<%categoriasIngresos = CategoriaController.getListaCategoriaIngresos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
 									<td style="color: red;"><%=totalCategoriasGastos%>&#8364;</td>
 									<td style="color: green;"><%=totalCategoriasIngresos%>&#8364;</td>
 									<td><%=totalCategoriasIngresos-totalCategoriasGastos%>&#8364;</td>
+									<%totalCategoriasGastos=0; %>
+									<%totalCategoriasIngresos=0; %>
 								</tr>
 							</tbody>
 						</table>

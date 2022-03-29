@@ -190,9 +190,9 @@ public class CategoriaDao extends BaseDao implements IDao<Categoria>{
 			connect=super.getconnection();
 			statement=(CallableStatement) connect.prepareCall("{call obtenerCategorias()}");
 
-	            statement.registerOutParameter(1, Types.INTEGER);
+	            /*statement.registerOutParameter(1, Types.INTEGER);
 	            statement.registerOutParameter(2, Types.VARCHAR);
-	            statement.registerOutParameter(3, Types.BOOLEAN);
+	            statement.registerOutParameter(3, Types.BOOLEAN);*/
 
 	            rs=statement.executeQuery();
 
