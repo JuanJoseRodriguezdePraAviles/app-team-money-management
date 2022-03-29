@@ -5,10 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.Statement;
 import com.sinensia.contracts.IDao;
 import com.sinensia.model.Tramite;
@@ -153,7 +154,102 @@ public class TramiteDao extends BaseDao implements IDao<Tramite> {
 		}
 		return filasAfectadas;
 	}
+
+	@Override
+	public int agregar(Tramite tramite) throws SQLException {
+
+		int idTramite= 0;
+		CallableStatement statement= null;
+		ResultSet rs= null;
+		
+		try {
+	        connect = super.getconnection();
+	        statement = (CallableStatement) connect.prepareCall("{call agregarTramite(?, ?, ?, ?, ?)}");
+			statement.registerOutParameter(1, Types.INTEGER);
+			statement.registerOutParameter(2, Types.DOUBLE);
+			statement.registerOutParameter(3, Types.DATE);
+            statement.registerOutParameter(4, Types.INTEGER);
+            statement.registerOutParameter(5, Types.VARCHAR);
+            
+            statement.setInt(1, tramite.getTramiteId());
+            statement.setDouble(2, tramite.getValor());
+            statement.setDate(3, Date.valueOf(tramite.getFecha()));
+            statement.setInt(4, tramite.getCategoriaId());
+            statement.setString(5, tramite.getConcepto());
+			
+            statement.execute();
+			rs=statement.getGeneratedKeys();
+			rs.next();
+			idTramite = rs.getInt(1);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (statement !=null)
+				statement.close();
+			if (rs != null)
+				rs.close();
+			if (connect != null)
+				connect.close();
+			
+		}
 	
+		return idTramite;
+	}
+	
+
+	@Override
+	public List<Tramite> obtener() throws SQLException {
+		List<Tramite> tramites = new ArrayList<Tramite>();
+		CallableStatement statement= null;
+		ResultSet rs= null;
+		
+		try {
+			connect=super.getconnection();
+			statement=(CallableStatement) connect.prepareCall("{call obtenerTramites()}");
+	 
+	            statement.registerOutParameter(1, Types.INTEGER);
+	            statement.registerOutParameter(2, Types.DOUBLE);
+	            statement.registerOutParameter(3, Types.DATE);
+	            statement.registerOutParameter(4, Types.INTEGER);
+	            statement.registerOutParameter(5, Types.VARCHAR);
+			
+	            rs=statement.executeQuery();
+	            
+			while (rs.next()) {
+				Tramite tramite= new Tramite();
+				int tramiteId= rs.getInt("tramiteId");
+				Double valor= rs.getDouble("valor");
+				Date fecha = rs.getDate("fecha");
+				int categoriaId= rs.getInt("categoriaId");
+				String concepto = rs.getString("concepto");
+				
+				
+				tramite.setTramiteId(tramiteId);
+				tramite.setValor(valor);
+				tramite.setCategoriaId(categoriaId);
+				tramite.setConcepto(concepto);
+				tramite.setFecha(fecha.toLocalDate());
+				
+				
+			}
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				if (statement !=null)
+					statement.close();
+				if (rs != null)
+					rs.close();
+				if (connect != null)
+					connect.close();
+				
+			}
+		
+		return tramites;
+	}
 	
 
 }
