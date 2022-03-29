@@ -9,11 +9,12 @@
 <%@ page import="com.sinensia.controllers.CategoriaController"%>
 <%@ page import="com.sinensia.dao.CategoriaDao"%>
 <%@ page import="com.sinensia.model.Tramite"%>
-<%@ page import="com.sinensia.dao.TramiteDao"%>
+<%@ page import="com.sinensia.services.TramiteService"%>
 <%@ page import="com.sinensia.controllers.TramiteController"%>
 <%@ page import="java.time.Period"%>
 <%@ page import="java.math.BigDecimal"%>
 <%@ page import="java.math.RoundingMode"%>
+<%@ page import="javax.servlet.http.Cookie"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,26 +36,53 @@
 	<%CategoriaDao categoriaDao = new CategoriaDao();%>
 	<%List<Categoria> categorias = categoriaDao.get();%>
 
+	<%Cookie[] configuracion = request.getCookies(); %>
+	<%boolean conf=true; %>
+	<%if (configuracion != null) {
+        for (int i = 0; i < configuracion.length; i++) {
+            if (configuracion[i].getName().equals("configuracion")) {
+                conf = Boolean.parseBoolean(configuracion[i].getValue());
+            }
+        }
+    } %>
 	<%for(Categoria categoria : categorias){%>
-		<%categoria = CategoriaController.insertaTramites(categoria);%>
+	<%categoria = CategoriaController.insertaTramites(categoria, conf);%>
+	<%}%>
+
+	<%int mes = LocalDate.now().getMonthValue();%>
+	<%int anyo = LocalDate.now().getYear();%>
+
+	<%List<Categoria> categoriasGastos = CategoriaController.getListaCategoriaGastos(categorias, mes, anyo);%>
+	<%List<Categoria> categoriasIngresos = CategoriaController.getListaCategoriaIngresos(categorias, mes, anyo);%>
+
+	<%for (Categoria categoria : categoriasGastos) {%>
+	<%totalCategoria = CategoriaController.getValorImportesCategoriaMes(categoria, mes, anyo);%>
+	<%totalCategoriasGastos += totalCategoria; %>
+	<%}%>
+
+	<%for (Categoria categoria : categoriasIngresos) {%>
+	<%totalCategoria = CategoriaController.getValorImportesCategoriaMes(categoria, mes, anyo);%>
+	<%totalCategoriasIngresos += totalCategoria; %>
+
 	<%}%>
 
 	<%@ include file="Cabecera.jsp"%>
 	<div id="carouselExampleIndicators" class="carousel slide" onload="(#carouselExampleIndicators).carousel('pause')">
 		<div class="carousel-inner" onload=".carousel('pause')">
-			<%TramiteDao tramiteDao = new TramiteDao();%>
-			<%List<Tramite> tramites = tramiteDao.get();%>
-			<%tramites = TramiteController.getListaTramiteOrdenada(tramites);%>
-			<%int mesesTotales = 1;%>
-			<%LocalDate primeraFecha = LocalDate.now();%>
-			<%if(tramites.size() > 1) { %>
-				<%primeraFecha = tramites.get(0).getFecha();%>
-				<%primeraFecha = primeraFecha.withDayOfMonth(1);%>
-				<%LocalDate ultimaFecha = tramites.get(tramites.size() - 1).getFecha();%>
-				<%ultimaFecha = ultimaFecha.withDayOfMonth(1);%>
-				<%mesesTotales = Period.between(primeraFecha, ultimaFecha).getMonths();%>
-			<%}%>
 
+			<%TramiteService tramiteService = new TramiteService();%>
+			<%List<Tramite> tramites = tramiteService.get(conf);%>
+			<% tramites = TramiteController.getListaTramiteOrdenada(tramites); %>
+			<% int mesesTotales = 1;%>
+			<%LocalDate primeraFecha = LocalDate.now(); %>
+			<%if(tramites.size()>1){ %>
+			<% primeraFecha = tramites.get(0).getFecha();  %>
+			<% primeraFecha = primeraFecha.withDayOfMonth(1);  %>
+			<% LocalDate ultimaFecha = tramites.get(tramites.size()-1).getFecha(); %>
+			<% ultimaFecha = ultimaFecha.withDayOfMonth(1);  %>
+			<% mesesTotales = Period.between(primeraFecha, ultimaFecha).getMonths(); %>
+
+			<%} %>
 			<%for(int i=0; i<=mesesTotales; i++) {%>
 				<%List<Categoria> categoriasGastos = CategoriaController.getListaCategoriaGastos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
 				<%List<Categoria> categoriasIngresos = CategoriaController.getListaCategoriaIngresos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
@@ -74,6 +102,7 @@
 				<%} else { %>
 				<div onload="(#carouselExampleIndicators).carousel('pause')" class="carousel-item">
 				<%}%>
+
 					<%fechaCompleta = primeraFecha.format(DateTimeFormatter.ofPattern("MMMM yyyy", fechaEs)); %>
 					<h1 class="fechaCompleta"><%=fechaCompleta %></h1>
 					<div class="container shadow fondoDeLaTabla">
@@ -87,13 +116,34 @@
 							</thead>
 							<tbody>
 								<tr>
+									<% categoriasGastos = CategoriaController.getListaCategoriaGastos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<% categoriasIngresos = CategoriaController.getListaCategoriaIngresos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<%totalCategoriasGastos=0; %>
+									<%totalCategoriasIngresos=0; %>
+									<%for (Categoria categoria : categoriasGastos) {%>
+									<%totalCategoria = CategoriaController.getValorImportesCategoriaMes(categoria, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<%totalCategoriasGastos += totalCategoria; %>
+									<%}%>
+								
+									<%for (Categoria categoria : categoriasIngresos) {%>
+									<%totalCategoria = CategoriaController.getValorImportesCategoriaMes(categoria, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<%totalCategoriasIngresos += totalCategoria; %>
+									<%}%>
+									<%categoriasGastos = CategoriaController.getListaCategoriaGastos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+									<%categoriasIngresos = CategoriaController.getListaCategoriaIngresos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
 									<td class="colorTextoTablaGastos"><%=totalCategoriasGastos%>&#8364;</td>
 									<td class="colorTextoTablaIngresos"><%=totalCategoriasIngresos%>&#8364;</td>
 									<td><%=totalCategoriasIngresos-totalCategoriasGastos%>&#8364;</td>
+									<%totalCategoriasGastos=0; %>
+									<%totalCategoriasIngresos=0; %>
 								</tr>
 							</tbody>
 						</table>
 					</div>
+					<%categoriasGastos = CategoriaController.getListaCategoriaGastos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+					<%totalCategoriasGastos=0; %>
+					<%categoriasIngresos = CategoriaController.getListaCategoriaIngresos(categorias, primeraFecha.getMonthValue(), primeraFecha.getYear());%>
+					<%totalCategoriasIngresos=0; %>
 					<div class="d-flex justify-content-around">
 						<div class="rounded border border-danger listaCategorias fondoGastos">
 							<h3 class="colorDeTextoTramites">Gastos</h3>
@@ -125,6 +175,7 @@
 										<%porcentaje = porcentaje.setScale(2, RoundingMode.HALF_UP);%>
 										<span class="badge rounded-pill porcentajeIngresos"><%=porcentaje.doubleValue()%>%</span>
 									</li>
+
 								<%}%>
 							</ul>
 						</div>
@@ -137,6 +188,7 @@
 				<%primeraFecha = primeraFecha.plusMonths(1);%>
 				
 			<%}%>
+
 
 			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true" onload="(#carouselExampleIndicators).carousel('pause')"></span>
@@ -157,7 +209,6 @@
 				<a class="btn fw-bold botonIngresos" href="NuevoTramiteIngreso.jsp" role="button">Ingresos</a>
 			</div>
 		</div>
-		
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -9,10 +9,10 @@
 <%@ page import="com.sinensia.model.Categoria"%>
 <%@ page import="com.sinensia.controllers.TramiteController"%>
 <%@ page import="com.sinensia.controllers.CategoriaController"%>
-<%@ page import="com.sinensia.dao.TramiteDao"%>
-<%@ page import="com.sinensia.dao.CategoriaDao"%>
+
 <%@ page import="com.sinensia.services.CategoriaService"%>
 <%@ page import="com.sinensia.services.TramiteService"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +25,19 @@
 </head>
 
 <body>
+	<%Cookie cookie = new Cookie("configuracion", "true");%>
+	<%response.addCookie(cookie);%>
+
+	<%Cookie[] configuracion = request.getCookies(); %>
+	<%boolean conf=true; %>
+	<%if (configuracion != null) {
+        for (int i = 0; i < configuracion.length; i++) {
+            if (configuracion[i].getName().equals("configuracion")) {
+                conf = Boolean.parseBoolean(configuracion[i].getValue());
+            }
+        }
+    } %>
+
 	<%double tramiteMes= 0; %>
 	<%double totalGastos = 0;%>
 	<%double totalIngresos = 0;%>
@@ -38,10 +51,11 @@
 	<%List<Tramite> tramites = tramiteService.get();%>
 
 	<%CategoriaService categoriaService = new CategoriaService();%>
-	<%List<Categoria> categorias = categoriaService.get();%>
+	<%List<Categoria> categorias = categoriaService.get(conf);%>
 
 	<%for(Categoria categoria : categorias){%>
-		<%categoria = CategoriaController.insertaTramites(categoria);%>
+
+	<%categoria = CategoriaController.insertaTramites(categoria, conf);%>
 	<%}%>
 
 	<%int mes = LocalDate.now().getMonthValue();%>
@@ -66,8 +80,8 @@
 		<table class="table" id="tabla">
 			<thead>
 				<tr>
-					<th scope="col">Día</th>
-					<th scope="col">Categoría</th>
+					<th scope="col">DÃ­a</th>
+					<th scope="col">CategorÃ­a</th>
 					<th scope="col">Concepto</th>
 					<th scope="col">Importe</th>
 				</tr>

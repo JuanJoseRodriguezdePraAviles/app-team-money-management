@@ -7,6 +7,9 @@
 <%@ page import="com.sinensia.controllers.CategoriaController"%>
 <%@ page import="com.sinensia.dao.CategoriaDao"%>
 <%@ page import="com.sinensia.dao.TramiteDao"%>
+<%@ page import="javax.servlet.http.Cookie"%>
+<%@ page import="com.sinensia.services.CategoriaService"%>
+<%@ page import="com.sinensia.services.TramiteService"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +18,31 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<%CategoriaDao categoriaDao = new CategoriaDao();%>
-	<%List<Categoria> categorias = categoriaDao.get();%>
-	
-	<%TramiteDao tramiteDao = new TramiteDao();%>
-	<%List<Tramite> tramites = tramiteDao.get();%>
+	<%Cookie cookie = new Cookie("configuracion", "true");%>
+	<%response.addCookie(cookie);%>
+
+	<%Cookie[] configuracion = request.getCookies(); %>
+	<%boolean conf=true; %>
+	<%if (configuracion != null) {
+        for (int i = 0; i < configuracion.length; i++) {
+            if (configuracion[i].getName().equals("configuracion")) {
+                conf = Boolean.parseBoolean(configuracion[i].getValue());
+            }
+        }
+    } %>
+
+	<%TramiteService tramiteService = new TramiteService();%>
+	<%List<Tramite> tramites = tramiteService.get(conf);%>
 	
 	<%@ include file="Cabecera.jsp"%>
 	<div class="d-flex justify-content-around">
 		<div class="container">
 			<h1 class="titulos">Gastos</h1>
 			<div class="row row-cols-2">
+			<%CategoriaService categoriaService = new CategoriaService();%>
+			<%List<Categoria> categorias = categoriaService.get(conf);%>
 				<%for (Categoria categoria : categorias) {%>
-					<%categoria = CategoriaController.insertaTramites(categoria);%>
+					<%categoria = CategoriaController.insertaTramites(categoria, conf);%>
 					<%if(!categoria.isEsIngreso()) {%>
 					<div class="col-sm-6">
 						<div class="card rounded border border-danger cardsStyle fondoGastos">
@@ -85,7 +100,7 @@
 			<h1 class="titulos">Ingresos</h1>
 			<div class="row row-cols-2">
 				<%for (Categoria categoria : categorias) {%>
-					<%categoria = CategoriaController.insertaTramites(categoria);%>
+					<%categoria = CategoriaController.insertaTramites(categoria, conf);%>
 					<%if(categoria.isEsIngreso()) {%>
 					<div class="col-sm-6">
 						<div class="card rounded border border-success cardsStyle fondoIngresos">

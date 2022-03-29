@@ -100,14 +100,15 @@ public class CategoriaController extends HttpServlet {
 		return listaResultado;
 	}
 	
-	public static Categoria insertaTramites(Categoria categoria) throws SQLException {
+	public static Categoria insertaTramites(Categoria categoria, boolean configuracion) throws SQLException {
 		TramiteService tramiteService = new TramiteService();
-		List<Tramite> listaTramites = tramiteService.get();
+		List<Tramite> listaTramites = tramiteService.get(configuracion);
 		List<Tramite> tramitesInsertar = new ArrayList<Tramite>();
-		
-		for(Tramite t : listaTramites) {
-			if(categoria.getCategoriaId()==t.getCategoriaId())
-				tramitesInsertar.add(t);
+		if(listaTramites!=null) {
+			for(Tramite t : listaTramites) {
+				if(categoria.getCategoriaId()==t.getCategoriaId())
+					tramitesInsertar.add(t);
+			}
 		}
 		categoria.setListaTramites(tramitesInsertar);
 		

@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,9 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sinensia.contracts.IDao;
-import com.sinensia.dao.TramiteDao;
-import com.sinensia.model.Categoria;
 import com.sinensia.model.Tramite;
 import com.sinensia.services.TramiteService;
 
@@ -88,8 +84,10 @@ public class TramiteController extends HttpServlet {
 	
 	public static List<Tramite> getListaTramiteOrdenada(List<Tramite> lista) throws SQLException {
 		List<LocalDate> valoresFecha = new ArrayList<LocalDate>();
-		for(Tramite t: lista) {
-			valoresFecha.add(t.getFecha());
+		if(lista!=null) {
+			for(Tramite t: lista) {
+				valoresFecha.add(t.getFecha());
+			}
 		}
 		valoresFecha = valoresFecha.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
 		
